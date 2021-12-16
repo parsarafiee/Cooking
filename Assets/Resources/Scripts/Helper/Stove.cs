@@ -9,7 +9,7 @@ public class Stove : MonoBehaviour
     public bool stoveIsOn { get; set; }
     public bool BurgerIsReady { get; set; }
     float BurgerTimer = 0;
-    float timeToMakeOneBurger=10;
+    float timeToMakeOneBurger=20;
     public void Refresh()
     {
         if (stoveIsOn)

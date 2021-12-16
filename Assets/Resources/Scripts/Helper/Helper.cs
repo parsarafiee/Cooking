@@ -53,7 +53,8 @@ public class Helper : MonoBehaviour
         GameObject obj = null;
         foreach (GameObject item in GameLinks.gl.allStovesLocations)
         {
-           if(item.GetComponent<Stove>().BurgerIsReady)
+           if(item.GetComponent<Stove>().BurgerIsReady && item.GetComponent<Stove>().stoveIsOn)
+
             {
                 return item;
             }

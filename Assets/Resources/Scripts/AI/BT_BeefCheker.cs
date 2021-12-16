@@ -6,8 +6,7 @@ using BT_lib;
 public class BT_BeefCheker : MonoBehaviour
 {
     //
-    int order = 1;
-    bool imdoingSomting;
+    public int order = 1;
     Movement move;
     OvenChecker ovenChecker;
     BT Seq_MaKeBeefOnOven;
@@ -103,10 +102,11 @@ public class BT_BeefCheker : MonoBehaviour
         if (Helper.CheckDistance(this.transform, stove.transform, checkDistanceVariation) && ovenChecker.HasTheBeefOnHisHand && !ovenChecker.TuredOnTheOven)
         {
             Transform child = this.transform.GetComponentInChildren<Food_Beef>().transform;
-            order =-1;
+            order -=1;
             child.position = stove.transform.position;
             child.SetParent(stove.transform);
-            ovenChecker.TuredOnTheOven = true;
+            stove.GetComponent<Stove>().IsFull = true;
+            ovenChecker.HasTheBeefOnHisHand = false;
             stove.GetComponent<Stove>().SwitchStove();
             b = BT_VALUE.SUCCESS;
 
@@ -128,9 +128,10 @@ public class BT_BeefCheker : MonoBehaviour
 
         if (Helper.WhichBeefReadyToPicked())
         {
-            if (Helper.WhichBeefReadyToPicked().GetComponent<Stove>().stoveIsOn)
+            if (Helper.WhichBeefReadyToPicked().GetComponentInChildren<Stove>().stoveIsOn)
             {
                 b = BT_VALUE.SUCCESS;
+
 
             }
         }
@@ -140,6 +141,7 @@ public class BT_BeefCheker : MonoBehaviour
     BT_VALUE TurnOffTheOven()
     {
         BT_VALUE b = BT_VALUE.RUNNING;
+        
         GameObject stove = Helper.WhichBeefReadyToPicked();
         move.navMeshAgent.SetDestination(stove.transform.position);
         if (Helper.CheckDistance(this.transform, stove.transform, checkDistanceVariation))
@@ -160,10 +162,16 @@ public class BT_BeefCheker : MonoBehaviour
         move.navMeshAgent.SetDestination(GameLinks.gl.CustomerTable.position);
         if (Helper.CheckDistance(this.transform, GameLinks.gl.CustomerTable.transform, checkDistanceVariation))
         {
+            RestartTheAI();
             b = BT_VALUE.SUCCESS;
         }
 
         return b;
+    }
+
+    public void RestartTheAI()
+    {
+
     }
 
 
