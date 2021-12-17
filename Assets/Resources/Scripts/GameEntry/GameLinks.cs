@@ -19,7 +19,9 @@ public class GameLinks : MonoBehaviour
     public int SaladnUmbers;
 
     public List<GameObject> allStovesLocations;
-    public Transform HeadOfOvenChecker;
+    public Transform trayOfOvenChecker;
+    public Transform trayOfToppingChecker;
     public Transform CustomerTable;
+    public Transform toppingTableTransform;
 
 }

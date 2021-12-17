@@ -91,6 +91,29 @@ public class FoodManager
 
 
     }
+    public void AddOneFoodTolist(Food food)
+    {
+
+        if (food.GetComponent<Food_Bread>())
+        {
+            breadList.Add(food);
+        }
+        else if (food.GetComponent<Food_Beef>())
+        {
+            hamburgerList.Add(food);
+        }
+        else if (food.GetComponent<Food_Tomato>())
+        {
+            tomatoList.Add(food);
+        }
+        else if (food.GetComponent<Food_Salad>())
+        {
+            saladList.Add(food);
+        }
+
+
+
+    }
     public void Refresh()
     {
         Debug.Log(hamburgerList.Count);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,8 +64,18 @@ public class Helper : MonoBehaviour
 
     }
 
+    public static bool CheckNumberOfToppings(List<Food> foodListInfo,int MaxToppingNumber)
+    {
+        bool isFull = false;
+        if (foodListInfo.Count == MaxToppingNumber)
+        {
+            isFull = true;
+        }
+        return isFull;
+    }
 
-
-
-
+    internal static void AddOneFoodObjectOfList(List<Food> list)
+    {
+        FoodManager.Instance.AddOneFoodTolist(list[0]);
+    }
 }

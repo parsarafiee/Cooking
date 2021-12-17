@@ -8,7 +8,7 @@ public class BT_BeefCheker : MonoBehaviour
     //
     public int order = 1;
     Movement move;
-    OvenChecker ovenChecker;
+    BeefCheker ovenChecker;
     BT Seq_MaKeBeefOnOven;
     BT Seq_CheckBurningBeef;
     BT Sel_OvenCheckerAI;
@@ -20,7 +20,7 @@ public class BT_BeefCheker : MonoBehaviour
     private void Start()
     {
         move = GetComponent<Movement>();
-        ovenChecker = GetComponent<OvenChecker>();
+        ovenChecker = GetComponent<BeefCheker>();
         // Sel_OvenCheckerAI = new BT(NODE_TYPE.SELECTOR, Seq_MaKeBeefOnOven, new BT(this.TakeNewBeef));
 
         Seq_CheckBurningBeef = new BT(NODE_TYPE.SEQUENCE, new BT(this.IfBurgerIsReady), new BT(this.TurnOffTheOven));
@@ -45,6 +45,7 @@ public class BT_BeefCheker : MonoBehaviour
 
         if (order > 0  )
         {
+            GameLinks.gl.trayOfOvenChecker.gameObject.SetActive(true);
             check = BT_VALUE.SUCCESS;
         }
 
@@ -77,7 +78,7 @@ public class BT_BeefCheker : MonoBehaviour
                 Helper.PickUpOneFoodObjectOfList(FoodManager.Instance.hamburgerList);
                 //make a prefab on top of the head
                 GameObject beef = Instantiate(FoodManager.Instance.foodPrefabDict[FoodType.Hamburger]);
-                beef.transform.position = GameLinks.gl.HeadOfOvenChecker.transform.position;
+                beef.transform.position = GameLinks.gl.trayOfOvenChecker.transform.position;
                 beef.transform.SetParent(this.transform);
 
 
@@ -162,8 +163,10 @@ public class BT_BeefCheker : MonoBehaviour
         move.navMeshAgent.SetDestination(GameLinks.gl.CustomerTable.position);
         if (Helper.CheckDistance(this.transform, GameLinks.gl.CustomerTable.transform, checkDistanceVariation))
         {
+            GameLinks.gl.trayOfOvenChecker.gameObject.SetActive(false);
             RestartTheAI();
             b = BT_VALUE.SUCCESS;
+
         }
 
         return b;
