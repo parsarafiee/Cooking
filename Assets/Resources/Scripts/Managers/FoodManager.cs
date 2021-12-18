@@ -60,7 +60,7 @@ public class FoodManager
 
         for (int i = 0; i < number; i++)
         {
-            GameObject newFood = GameObject.Instantiate(foodPrefabDict[foodType]);
+            GameObject newFood = GameObject.Instantiate(foodPrefabDict[foodType], GameLinks.gl.foodParents);
             Food f = newFood.GetComponent<Food>();
             newFood.AddComponent<Rigidbody>();
             f.Initialize(pos+new Vector3(0,(float)i/2,(float)i/12f));
@@ -98,15 +98,15 @@ public class FoodManager
         {
             breadList.Add(food);
         }
-        else if (food.GetComponent<Food_Beef>())
+        if (food.GetComponent<Food_Beef>())
         {
             hamburgerList.Add(food);
         }
-        else if (food.GetComponent<Food_Tomato>())
+        if (food.GetComponent<Food_Tomato>())
         {
             tomatoList.Add(food);
         }
-        else if (food.GetComponent<Food_Salad>())
+        if (food.GetComponent<Food_Salad>())
         {
             saladList.Add(food);
         }
@@ -116,7 +116,7 @@ public class FoodManager
     }
     public void Refresh()
     {
-        Debug.Log(hamburgerList.Count);
+        Debug.Log(breadList.Count);
     }
 
 }

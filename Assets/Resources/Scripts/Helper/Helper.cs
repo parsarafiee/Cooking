@@ -48,13 +48,36 @@ public class Helper : MonoBehaviour
         GameObject.Destroy(list[0].gameObject);
         FoodManager.Instance.OneFoodIsPicked(list[0]);
     }
+    public static void PickUpFoodsOfList(List<Food> list, int Number)
+    {
+        for (int i = 0; i < Number; i++)
+        {
+            GameObject.Destroy(list[i].gameObject);
+
+            FoodManager.Instance.OneFoodIsPicked(list[i]);
+        }
+    }
 
     public static GameObject WhichBeefReadyToPicked()
     {
         GameObject obj = null;
         foreach (GameObject item in GameLinks.gl.allStovesLocations)
         {
-           if(item.GetComponent<Stove>().BurgerIsReady && item.GetComponent<Stove>().stoveIsOn)
+            if (item.GetComponent<Stove>().BurgerIsReady && item.GetComponent<Stove>().stoveIsOn)
+
+            {
+                return item;
+            }
+        }
+        return obj;
+
+    }
+    public static GameObject WhichBeefReadyToPickedForChef()
+    {
+        GameObject obj = null;
+        foreach (GameObject item in GameLinks.gl.allStovesLocations)
+        {
+            if (item.GetComponent<Stove>().BurgerIsReady)
 
             {
                 return item;
@@ -64,7 +87,7 @@ public class Helper : MonoBehaviour
 
     }
 
-    public static bool CheckNumberOfToppings(List<Food> foodListInfo,int MaxToppingNumber)
+    public static bool CheckNumberOfToppings(List<Food> foodListInfo, int MaxToppingNumber)
     {
         bool isFull = false;
         if (foodListInfo.Count == MaxToppingNumber)

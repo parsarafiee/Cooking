@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class Stove : MonoBehaviour
 {
-
+    public MeshRenderer mesh;
+    public Material material;
     public bool IsFull { get; set; }
     public bool stoveIsOn { get; set; }
     public bool BurgerIsReady { get; set; }
     float BurgerTimer = 0;
-    float timeToMakeOneBurger=20;
+    float timeToMakeOneBurger=10;
     public void Refresh()
     {
         if (stoveIsOn)
         {
             BurgerTimer += Time.deltaTime;
-            Debug.Log(BurgerTimer);
+          //  Debug.Log(BurgerTimer);
         }
         CheckIFBurgerIsReady();
-        if (BurgerIsReady)
-        {
+        //if (BurgerIsReady)
+        //{
+        //    mesh.material = material;
+        //    //Make a Sound
+        //    //
+        //}
+
             //Make a Sound
             //
-        }
+        
     }
 
     void CheckIFBurgerIsReady()

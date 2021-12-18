@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class MainChef : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool HasBread { get; set; }
+    public bool HasTomato { get; set; }
+    public bool HasSalad { get; set; }
+    public bool HasBeef { get; set; }
+    public bool ImDoneWithTheORder { get; set; }
+    private void Start()
     {
-        
-    }
+        HasBread = false;
+        HasTomato = false;
+        HasSalad = false;
+        HasBeef = false;
+        ImDoneWithTheORder = false;
 
-    // Update is called once per frame
-    void Update()
+    }
+    public void  ResetChef()
     {
-        
+        HasBread = false;
+        HasTomato = false;
+        HasSalad = false;
+        HasBeef = false;
+        ImDoneWithTheORder = false;
+
     }
 }

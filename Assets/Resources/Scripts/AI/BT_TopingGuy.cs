@@ -12,6 +12,7 @@ public class BT_TopingGuy : MonoBehaviour
     BT Seq_CheckTomato;
     BT Seq_CheckSalad;
     BT Sel_ToppingGuy;
+    BT Seq_ImdoingSomething;
 
     ToppingChecker ToppingChecker;
 
@@ -26,6 +27,8 @@ public class BT_TopingGuy : MonoBehaviour
     {
         ToppingChecker = GetComponent<ToppingChecker>();
         move = GetComponent<Movement>();
+
+        Seq_ImdoingSomething = new BT(NODE_TYPE.SEQUENCE ,new BT(this.SomethingInmyHand),new BT(this.ReplaceNewFood))
 
         Seq_CheckBread = new BT(NODE_TYPE.SEQUENCE, new BT(() => ListIsMissing(FoodManager.Instance.breadList, MaxNumber)),
                                                     new BT(() => GoToToppingTable(GameLinks.gl.toppingTableTransform, FoodType.Bread)),
@@ -121,7 +124,7 @@ public class BT_TopingGuy : MonoBehaviour
             Transform child = this.transform.GetComponentInChildren<Food>().transform;
             ToppingChecker.HasSomethingOnhisHand = false;
             child.transform.position = LocToGo.position;
-            child.transform.SetParent(foodParent.transform);
+            child.transform.SetParent(GameLinks.gl.foodParents);
             child.gameObject.AddComponent<Rigidbody>();
             Helper.AddOneFoodObjectOfList(list);
 

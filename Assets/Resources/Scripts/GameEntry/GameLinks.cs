@@ -20,8 +20,16 @@ public class GameLinks : MonoBehaviour
 
     public List<GameObject> allStovesLocations;
     public Transform trayOfOvenChecker;
+    public Transform trayOfMainChef;
     public Transform trayOfToppingChecker;
     public Transform CustomerTable;
+    public Transform MainChefLocation;
     public Transform toppingTableTransform;
+    public Transform dropBirgerTable;
+
+    public Transform foodParents;
+
+
+    public GameObject HamburgerPrefab;
 
 }

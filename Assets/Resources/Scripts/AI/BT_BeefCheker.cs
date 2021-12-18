@@ -13,12 +13,16 @@ public class BT_BeefCheker : MonoBehaviour
     BT Seq_CheckBurningBeef;
     BT Sel_OvenCheckerAI;
     BT Action_GoToInitialPositon;
+    BT_MainChef mainchef;
 
     public float checkDistanceVariation;
 
 
     private void Start()
     {
+
+        mainchef = FindObjectOfType<BT_MainChef>();
+        mainchef.Order = order;
         move = GetComponent<Movement>();
         ovenChecker = GetComponent<BeefCheker>();
         // Sel_OvenCheckerAI = new BT(NODE_TYPE.SELECTOR, Seq_MaKeBeefOnOven, new BT(this.TakeNewBeef));
