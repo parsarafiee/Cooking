@@ -57,7 +57,48 @@ public class Helper : MonoBehaviour
             FoodManager.Instance.OneFoodIsPicked(list[i]);
         }
     }
-
+    public static List<Food> GiveTypeList(GameObject food)
+    {
+        List<Food> list = null;
+        if (food.GetComponent<Food_Beef>())
+        {
+            list = FoodManager.Instance.hamburgerList;
+        }
+        if (food.GetComponent<Food_Bread>())
+        {
+            list = FoodManager.Instance.breadList;
+        }
+        if (food.GetComponent<Food_Tomato>())
+        {
+            list = FoodManager.Instance.tomatoList;
+        }
+        if (food.GetComponent<Food_Salad>())
+        {
+            list = FoodManager.Instance.saladList;
+        }
+        return list;
+    }
+    public static Transform GiveTheToppingLocation(Food food)
+    {
+        Transform g=   null;
+        if (food.GetComponent<Food_Beef>()) 
+        {
+            g = GameLinks.gl.hamburgerLocationSpawner;
+        }
+        if (food.GetComponent<Food_Bread>())
+        {
+            g = GameLinks.gl.breadLocationSpawner;
+        }
+        if (food.GetComponent<Food_Tomato>())
+        {
+            g = GameLinks.gl.tomatoLocationSpawner;
+        }
+        if (food.GetComponent<Food_Salad>())
+        {
+            g = GameLinks.gl.sladLocationSpawner;
+        }
+        return g;
+    }
     public static GameObject WhichBeefReadyToPicked()
     {
         GameObject obj = null;

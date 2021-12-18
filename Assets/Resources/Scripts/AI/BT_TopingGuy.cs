@@ -13,6 +13,7 @@ public class BT_TopingGuy : MonoBehaviour
     BT Seq_CheckSalad;
     BT Sel_ToppingGuy;
     BT Seq_ImdoingSomething;
+    BT Sel_ImdoingSomething;
 
     ToppingChecker ToppingChecker;
 
@@ -28,28 +29,25 @@ public class BT_TopingGuy : MonoBehaviour
         ToppingChecker = GetComponent<ToppingChecker>();
         move = GetComponent<Movement>();
 
-        Seq_ImdoingSomething = new BT(NODE_TYPE.SEQUENCE ,new BT(this.SomethingInmyHand),new BT(this.ReplaceNewFood))
+        Seq_ImdoingSomething = new BT(NODE_TYPE.SEQUENCE, new BT(this.SomethingInmyHand), new BT(this.ReplaceNewFood));
 
         Seq_CheckBread = new BT(NODE_TYPE.SEQUENCE, new BT(() => ListIsMissing(FoodManager.Instance.breadList, MaxNumber)),
-                                                    new BT(() => GoToToppingTable(GameLinks.gl.toppingTableTransform, FoodType.Bread)),
-                                                    new BT(() => ReplaceNewFood(GameLinks.gl.breadLocationSpawner, FoodManager.Instance.breadList)));
+                                                    new BT(() => GoToToppingTable(GameLinks.gl.toppingTableTransform, FoodType.Bread)));
+                                                    
 
 
         Seq_CheckBeef = new BT(NODE_TYPE.SEQUENCE, new BT(() => ListIsMissing(FoodManager.Instance.hamburgerList, MaxNumber)),
-                                                   new BT(() => GoToToppingTable(GameLinks.gl.toppingTableTransform, FoodType.Hamburger)),
-                                                   new BT(() => ReplaceNewFood(GameLinks.gl.hamburgerLocationSpawner, FoodManager.Instance.hamburgerList)));
+                                                   new BT(() => GoToToppingTable(GameLinks.gl.toppingTableTransform, FoodType.Hamburger)));
 
         Seq_CheckTomato = new BT(NODE_TYPE.SEQUENCE, new BT(() => ListIsMissing(FoodManager.Instance.tomatoList, MaxNumber)),
-                                                   new BT(() => GoToToppingTable(GameLinks.gl.toppingTableTransform, FoodType.Tomato)),
-                                                   new BT(() => ReplaceNewFood(GameLinks.gl.tomatoLocationSpawner, FoodManager.Instance.tomatoList)));
+                                                   new BT(() => GoToToppingTable(GameLinks.gl.toppingTableTransform, FoodType.Tomato)));
 
 
         Seq_CheckSalad = new BT(NODE_TYPE.SEQUENCE, new BT(() => ListIsMissing(FoodManager.Instance.saladList, MaxNumber)),
-                                                   new BT(() => GoToToppingTable(GameLinks.gl.toppingTableTransform, FoodType.Salad)),
-                                                   new BT(() => ReplaceNewFood(GameLinks.gl.sladLocationSpawner, FoodManager.Instance.saladList)));
+                                                   new BT(() => GoToToppingTable(GameLinks.gl.toppingTableTransform, FoodType.Salad)));
+       // Sel_ImdoingSomething = new BT(NODE_TYPE.SELECTOR,  Sel_ToppingGuy, new BT(() => GoTospecificLocation(GameLinks.gl.toppingTableTransform)));
 
-
-        Sel_ToppingGuy = new BT(NODE_TYPE.SELECTOR, Seq_CheckBread, Seq_CheckBeef, Seq_CheckTomato, Seq_CheckSalad, new BT(() => GoTospecificLocation(GameLinks.gl.toppingTableTransform)));
+        Sel_ToppingGuy = new BT(NODE_TYPE.SELECTOR, Seq_ImdoingSomething, Seq_CheckBread, Seq_CheckBeef, Seq_CheckTomato, Seq_CheckSalad,new BT(() => GoTospecificLocation(GameLinks.gl.toppingTableTransform)));
 
 
     }
@@ -65,7 +63,15 @@ public class BT_TopingGuy : MonoBehaviour
 
 
 
-
+    BT_VALUE SomethingInmyHand()
+    {
+        BT_VALUE b = BT_VALUE.FAIL;
+        if (this.GetComponentInChildren<Food>())
+        {
+            b = BT_VALUE.SUCCESS;
+        }
+       return b;
+    }
 
     //seq_checkBread //
     BT_VALUE ListIsMissing(List<Food> list, int maxNumberOfTopping)
@@ -114,19 +120,44 @@ public class BT_TopingGuy : MonoBehaviour
     //    return b;
 
     //}
-    BT_VALUE ReplaceNewFood(Transform LocToGo, List<Food> list)
+    //BT_VALUE ReplaceNewFood(Transform LocToGo, List<Food> list)
+    //{
+    //    BT_VALUE b = BT_VALUE.RUNNING;
+    //    move.navMeshAgent.SetDestination(LocToGo.position);
+    //    GameObject foodParent = LocToGo.gameObject;
+    //    if (Helper.CheckDistance(this.transform, LocToGo, checkDistanceVariation))
+    //    {
+    //        Transform child = this.transform.GetComponentInChildren<Food>().transform;
+    //        ToppingChecker.HasSomethingOnhisHand = false;
+    //        child.transform.position = LocToGo.position;
+    //        child.transform.SetParent(GameLinks.gl.foodParents);
+    //        child.gameObject.AddComponent<Rigidbody>();
+    //        Helper.AddOneFoodObjectOfList(list);
+
+    //        b = BT_VALUE.SUCCESS;
+
+
+    //    }
+
+
+    //    return b;
+    //}
+    BT_VALUE ReplaceNewFood()
     {
         BT_VALUE b = BT_VALUE.RUNNING;
-        move.navMeshAgent.SetDestination(LocToGo.position);
-        GameObject foodParent = LocToGo.gameObject;
-        if (Helper.CheckDistance(this.transform, LocToGo, checkDistanceVariation))
+        GameObject food = GetComponentInChildren<Food>().gameObject;
+
+        Transform t = Helper.GiveTheToppingLocation(food.GetComponent<Food>());
+       
+        move.navMeshAgent.SetDestination(t.position);
+        GameObject foodParent = t.gameObject;
+        if (Helper.CheckDistance(this.transform, t, checkDistanceVariation))
         {
-            Transform child = this.transform.GetComponentInChildren<Food>().transform;
             ToppingChecker.HasSomethingOnhisHand = false;
-            child.transform.position = LocToGo.position;
-            child.transform.SetParent(GameLinks.gl.foodParents);
-            child.gameObject.AddComponent<Rigidbody>();
-            Helper.AddOneFoodObjectOfList(list);
+            t.transform.position = t.position;
+            food.transform.SetParent(GameLinks.gl.foodParents);
+            food.gameObject.AddComponent<Rigidbody>();
+            Helper.AddOneFoodObjectOfList(Helper.GiveTypeList(food));
 
             b = BT_VALUE.SUCCESS;
 
