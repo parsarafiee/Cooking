@@ -72,7 +72,7 @@ public class BT_BeefCheker : MonoBehaviour
     {
         BT_VALUE b = BT_VALUE.SUCCESS;
         if (!ovenChecker.HasTheBeefOnHisHand)
-        {
+            {
             b = BT_VALUE.RUNNING;
             move.navMeshAgent.SetDestination(GameLinks.gl.hamburgerLocation.position);
             if (Helper.CheckDistance(this.transform, GameLinks.gl.hamburgerLocation, checkDistanceVariation))

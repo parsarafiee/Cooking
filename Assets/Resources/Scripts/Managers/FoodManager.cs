@@ -73,42 +73,38 @@ public class FoodManager
 
         if (food.GetComponent<Food_Bread>())
         {
-            breadList.Remove(food);
+            breadList.Remove(breadList[0]);
+            breadList.RemoveAll(item => item == null);
+
+
         }
-        else if (food.GetComponent<Food_Beef>())
+        if (food.GetComponent<Food_Beef>())
         {
-            hamburgerList.Remove(food);
+            hamburgerList.Remove(hamburgerList[0]);
+            hamburgerList.RemoveAll(item => item == null);
         }
-        else if (food.GetComponent<Food_Tomato>())
+        if (food.GetComponent<Food_Tomato>())
         {
-            tomatoList.Remove(food);
+            tomatoList.Remove(tomatoList[0]);
+            tomatoList.RemoveAll(item => item == null);
+
         }
-        else if (food.GetComponent<Food_Salad>())
+        if (food.GetComponent<Food_Salad>())
         {
-            saladList.Remove(food);
+            saladList.Remove(saladList[0]);
+            saladList.RemoveAll(item => item == null);
+
         }
 
 
 
     }
-    public void AddOneFoodTolist(Food food)
+    public void AddOneFoodTolist(List<Food> list,int j)
     {
+        for (int i = 0; i < j; i++)
+        {
 
-        if (food.GetComponent<Food_Bread>())
-        {
-            breadList.Add(food);
-        }
-        if (food.GetComponent<Food_Beef>())
-        {
-            hamburgerList.Add(food);
-        }
-        if (food.GetComponent<Food_Tomato>())
-        {
-            tomatoList.Add(food);
-        }
-        if (food.GetComponent<Food_Salad>())
-        {
-            saladList.Add(food);
+            list.Add(list[0]);
         }
 
 

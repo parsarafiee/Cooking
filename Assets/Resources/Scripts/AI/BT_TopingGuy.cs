@@ -63,6 +63,30 @@ public class BT_TopingGuy : MonoBehaviour
 
 
 
+    BT_VALUE ReplaceNewFood()
+    {
+        BT_VALUE b = BT_VALUE.RUNNING;
+        GameObject food = GetComponentInChildren<Food>().gameObject;
+
+        Transform t = Helper.GiveTheToppingLocation(food.GetComponent<Food>());
+       
+        move.navMeshAgent.SetDestination(t.position);
+        if (Helper.CheckDistance(this.transform, t, checkDistanceVariation))
+        {
+            ToppingChecker.HasSomethingOnhisHand = false;
+            food.transform.position = t.position;
+            food.transform.SetParent(GameLinks.gl.foodParents);
+            food.gameObject.AddComponent<Rigidbody>();
+            Helper.AddOneFoodObjectOfList(Helper.GiveTypeList(food));
+
+            b = BT_VALUE.SUCCESS;
+
+
+        }
+
+
+        return b;
+    }
     BT_VALUE SomethingInmyHand()
     {
         BT_VALUE b = BT_VALUE.FAIL;
@@ -94,10 +118,10 @@ public class BT_TopingGuy : MonoBehaviour
             if (Helper.CheckDistance(this.transform, toppingTableLoc, checkDistanceVariation))
             {
                 ToppingChecker.HasSomethingOnhisHand = true;
-                GameObject newBread = Instantiate(FoodManager.Instance.foodPrefabDict[type]);
-                newBread.transform.position = GameLinks.gl.trayOfToppingChecker.transform.position;
+                GameObject newFood = Instantiate(FoodManager.Instance.foodPrefabDict[type]);
+                newFood.transform.position = GameLinks.gl.trayOfToppingChecker.transform.position;
 
-                newBread.transform.SetParent(this.transform);
+                newFood.transform.SetParent(this.transform);
 
             }
         }
@@ -142,31 +166,6 @@ public class BT_TopingGuy : MonoBehaviour
 
     //    return b;
     //}
-    BT_VALUE ReplaceNewFood()
-    {
-        BT_VALUE b = BT_VALUE.RUNNING;
-        GameObject food = GetComponentInChildren<Food>().gameObject;
-
-        Transform t = Helper.GiveTheToppingLocation(food.GetComponent<Food>());
-       
-        move.navMeshAgent.SetDestination(t.position);
-        GameObject foodParent = t.gameObject;
-        if (Helper.CheckDistance(this.transform, t, checkDistanceVariation))
-        {
-            ToppingChecker.HasSomethingOnhisHand = false;
-            t.transform.position = t.position;
-            food.transform.SetParent(GameLinks.gl.foodParents);
-            food.gameObject.AddComponent<Rigidbody>();
-            Helper.AddOneFoodObjectOfList(Helper.GiveTypeList(food));
-
-            b = BT_VALUE.SUCCESS;
-
-
-        }
-
-
-        return b;
-    }
 
 
     BT_VALUE GoTospecificLocation(Transform transform)
