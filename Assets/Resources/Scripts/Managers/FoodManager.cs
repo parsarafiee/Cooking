@@ -73,27 +73,23 @@ public class FoodManager
 
         if (food.GetComponent<Food_Bread>())
         {
-            breadList.Remove(breadList[0]);
-            breadList.RemoveAll(item => item == null);
-
-
+            // GameObject.Destroy(breadList[0].gameObject);
+            //  breadList.Remove(breadList[0]);
+            Debug.Log(breadList[0].GetHashCode());
+            Debug.Log(breadList.Remove(breadList[0]));
         }
         if (food.GetComponent<Food_Beef>())
         {
+            Debug.Log(hamburgerList[0].gameObject.GetInstanceID());
             hamburgerList.Remove(hamburgerList[0]);
-            hamburgerList.RemoveAll(item => item == null);
         }
         if (food.GetComponent<Food_Tomato>())
         {
             tomatoList.Remove(tomatoList[0]);
-            tomatoList.RemoveAll(item => item == null);
-
         }
         if (food.GetComponent<Food_Salad>())
         {
             saladList.Remove(saladList[0]);
-            saladList.RemoveAll(item => item == null);
-
         }
 
 
@@ -112,7 +108,7 @@ public class FoodManager
     }
     public void Refresh()
     {
-        Debug.Log(breadList.Count);
+      //  Debug.Log(breadList.Count);
     }
 
 }

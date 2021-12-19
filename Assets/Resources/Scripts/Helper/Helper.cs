@@ -45,16 +45,21 @@ public class Helper : MonoBehaviour
 
     public static void PickUpOneFoodObjectOfList(List<Food> list)
     {
-       GameObject.Destroy(list[0].gameObject);
-       FoodManager.Instance.OneFoodIsPicked(list[0]);
+        Food f = list[0];
+        Debug.Log(f.gameObject.GetInstanceID());
+        Debug.Log(f.GetType().Name);
+        FoodManager.Instance.OneFoodIsPicked(f);
+        GameObject.Destroy(f.gameObject);
     }
     public static void PickUpFoodsOfList(List<Food> list, int Number)
     {
-        for (int i = 0; i < Number; i++)
-        {
 
-            GameObject.Destroy(list[i].gameObject);
-            FoodManager.Instance.OneFoodIsPicked(list[i]);
+        for (int i = Number - 1; i >= 0; i--)
+        {
+            Food f = list[i];
+
+            FoodManager.Instance.OneFoodIsPicked(f);
+            GameObject.Destroy(f.gameObject);
         }
     }
     public static List<Food> GiveTypeList(GameObject food)
@@ -80,8 +85,8 @@ public class Helper : MonoBehaviour
     }
     public static Transform GiveTheToppingLocation(Food food)
     {
-        Transform g=   null;
-        if (food.GetComponent<Food_Beef>()) 
+        Transform g = null;
+        if (food.GetComponent<Food_Beef>())
         {
             g = GameLinks.gl.hamburgerLocation;
         }
@@ -140,6 +145,6 @@ public class Helper : MonoBehaviour
 
     internal static void AddOneFoodObjectOfList(List<Food> list)
     {
-        FoodManager.Instance.AddOneFoodTolist(list,1);
+        FoodManager.Instance.AddOneFoodTolist(list, 1);
     }
 }
