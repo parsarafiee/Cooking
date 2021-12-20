@@ -1239,7 +1239,7 @@ Transform:
   m_GameObject: {fileID: 629778541}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.54, z: -0.082}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 2015075996}
   m_RootOrder: 0
@@ -1507,7 +1507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788209434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.2, y: 0.13404453, z: -11.35}
+  m_LocalPosition: {x: -4.2, y: 0.13404453, z: -12.41}
   m_LocalScale: {x: 1, y: 1, z: 10}
   m_Children:
   - {fileID: 578529551}
@@ -2230,7 +2230,7 @@ MonoBehaviour:
   trayOfToppingChecker: {fileID: 1350381300}
   CustomerTable: {fileID: 578529551}
   MainChefLocation: {fileID: 938594519}
-  toppingTableTransform: {fileID: 2015075996}
+  toppingTableTransform: {fileID: 629778542}
   dropBirgerTable: {fileID: 1681169384}
   foodParents: {fileID: 888318311}
   HamburgerPrefab: {fileID: 323692323}
@@ -4350,7 +4350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015075992}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.21, y: 0.13404453, z: -1.25}
+  m_LocalPosition: {x: -4.21, y: 0.13404453, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 10}
   m_Children:
   - {fileID: 629778542}
