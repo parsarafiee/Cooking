@@ -19,4 +19,14 @@ public class UILinks : MonoBehaviour
 
     [SerializeField] GameObject MenuPanel;
     [SerializeField] GameObject OrderPanel;
+
+    public GameObject GetMenuPanel()
+    {
+        return MenuPanel;
+    }
+
+    public GameObject GetOrderPanel()
+    {
+        return OrderPanel;
+    }
 }
