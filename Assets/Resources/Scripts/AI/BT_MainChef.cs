@@ -13,7 +13,7 @@ public class BT_MainChef : MonoBehaviour
     BT sel_MainChef;
 
 
-    
+    BT_BeefCheker bt_beefCheker;
     MainChef mainChef;
 
    // public GameObject hamburgerPrefab;
@@ -27,7 +27,7 @@ public class BT_MainChef : MonoBehaviour
     public int Order { get; set; }
     private void Start()
     {
-        
+        bt_beefCheker = FindObjectOfType<BT_BeefCheker>();
         //hamburgerPrefab = Resources.Load<GameObject>("Prefabs/Hamburger");
         GameLinks.gl.HamburgerPrefab.gameObject.SetActive(false);
 
@@ -35,12 +35,12 @@ public class BT_MainChef : MonoBehaviour
         mainChef = GetComponent<MainChef>();
      //   seq_BurgerIsReady = new BT(NODE_TYPE.SEQUENCE,new BT(this.CHechIfHeHasTHeBurger));
        seq_MakeTheBurger = new BT(NODE_TYPE.SEQUENCE, new BT(this.GetBread),new BT(this.GetTomato),new BT(this.GetSalad),new BT(this.GetBeef),new BT(this.DropHaburgerInFrontDesk));
-        seq_ChechTheBeef = new BT(NODE_TYPE.SEQUENCE,new BT(this.CheckIfWeHaveOrder), new BT(this.CheckBurgerIsReady), seq_MakeTheBurger);
+        seq_ChechTheBeef = new BT(NODE_TYPE.SEQUENCE, new BT(this.CheckBurgerIsReady), seq_MakeTheBurger);
         sel_MainChef = new BT(NODE_TYPE.SELECTOR, seq_ChechTheBeef, new BT(this.Ac_GoToInitialPositon));
     }
     private void Update()
     {
-        
+        Order = bt_beefCheker.order;
         sel_MainChef.Evaluate();
 
     }
@@ -59,21 +59,21 @@ public class BT_MainChef : MonoBehaviour
 
     //}
 
-    BT_VALUE CheckIfWeHaveOrder()
-    {
-        BT_VALUE check = BT_VALUE.FAIL;
+    //BT_VALUE CheckIfWeHaveOrder()
+    //{
+    //    BT_VALUE check = BT_VALUE.FAIL;
 
 
-        //check if we have order
+    //    //check if we have order
 
-        if (Order>0)
-        {
-            check = BT_VALUE.SUCCESS;
-        }
+    //    if (Order>0)
+    //    {
+    //        check = BT_VALUE.SUCCESS;
+    //    }
 
-        return check;
+    //    return check;
 
-    }
+    //}
     BT_VALUE CheckBurgerIsReady()
     {
         BT_VALUE b = BT_VALUE.FAIL;
@@ -177,6 +177,9 @@ public class BT_MainChef : MonoBehaviour
             if (Helper.CheckDistance(this.transform, GameLinks.gl.dropBirgerTable, checkDistanceVariation))
             {
                 GameLinks.gl.HamburgerPrefab.gameObject.SetActive(false);
+                GameObject haburger = Instantiate(GameLinks.gl.HamburgerPrefab, GameLinks.gl.HaburgerFinishLocation.position,Quaternion.identity);
+                haburger.AddComponent<Rigidbody>();
+                haburger.SetActive(true);
                 mainChef.ResetChef();
                 Order -= 1;
                 mainChef.ImDoneWithTheORder = true;

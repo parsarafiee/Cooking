@@ -31,5 +31,5 @@ public class GameLinks : MonoBehaviour
 
 
     public GameObject HamburgerPrefab;
-
+    public Transform HaburgerFinishLocation;
 }
