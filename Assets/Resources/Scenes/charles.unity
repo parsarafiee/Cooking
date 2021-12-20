@@ -2839,6 +2839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f156a45e0eaad864c90cb1fb0db6652f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasTHeHamBurger: 0
 --- !u!136 &1289065224
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3596,7 +3597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2577dbf8867e9a842ab546bf37faa5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 3
+  order: 1
   checkDistanceVariation: 2
 --- !u!136 &1691263687
 CapsuleCollider:

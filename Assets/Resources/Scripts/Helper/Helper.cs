@@ -46,8 +46,6 @@ public class Helper : MonoBehaviour
     public static void PickUpOneFoodObjectOfList(List<Food> list)
     {
         Food f = list[0];
-        Debug.Log(f.gameObject.GetInstanceID());
-        Debug.Log(f.GetType().Name);
         FoodManager.Instance.OneFoodIsPicked(f);
         GameObject.Destroy(f.gameObject);
     }
@@ -86,19 +84,19 @@ public class Helper : MonoBehaviour
     public static Transform GiveTheToppingLocation(Food food)
     {
         Transform g = null;
-        if (food.GetComponent<Food_Beef>())
+        if (food.gameObject.GetComponent<Food_Beef>())
         {
             g = GameLinks.gl.hamburgerLocation;
         }
-        if (food.GetComponent<Food_Bread>())
+        if (food.gameObject.GetComponent<Food_Bread>())
         {
             g = GameLinks.gl.breadLocation;
         }
-        if (food.GetComponent<Food_Tomato>())
+        if (food.gameObject.GetComponent<Food_Tomato>())
         {
             g = GameLinks.gl.tomatoLocation;
         }
-        if (food.GetComponent<Food_Salad>())
+        if (food.gameObject.GetComponent<Food_Salad>())
         {
             g = GameLinks.gl.sladLocation;
         }

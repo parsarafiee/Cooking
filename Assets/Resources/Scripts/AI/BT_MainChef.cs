@@ -131,7 +131,7 @@ public class BT_MainChef : MonoBehaviour
             if (Helper.CheckDistance(this.transform, GameLinks.gl.sladLocation, checkDistanceVariation))
             {
                 mainChef.HasSalad = true;
-                Helper.PickUpFoodsOfList(FoodManager.Instance.tomatoList, NumberOfSalad);
+                Helper.PickUpFoodsOfList(FoodManager.Instance.saladList, NumberOfSalad);
             }
         }
         return b;

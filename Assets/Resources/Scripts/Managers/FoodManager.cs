@@ -109,6 +109,7 @@ public class FoodManager
     public void Refresh()
     {
         Debug.Log(breadList.Count);
+        Debug.Log(saladList.Count);
     }
 
 }
