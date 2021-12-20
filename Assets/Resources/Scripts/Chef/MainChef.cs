@@ -8,6 +8,7 @@ public class MainChef : MonoBehaviour
     public bool HasTomato { get; set; }
     public bool HasSalad { get; set; }
     public bool HasBeef { get; set; }
+    public bool hasTHeHamBurger;
     public bool ImDoneWithTheORder { get; set; }
     private void Start()
     {
@@ -16,7 +17,7 @@ public class MainChef : MonoBehaviour
         HasSalad = false;
         HasBeef = false;
         ImDoneWithTheORder = false;
-
+        hasTHeHamBurger = false;
     }
     public void  ResetChef()
     {
@@ -25,6 +26,7 @@ public class MainChef : MonoBehaviour
         HasSalad = false;
         HasBeef = false;
         ImDoneWithTheORder = false;
+        hasTHeHamBurger = false;
 
     }
 }

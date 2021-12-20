@@ -53,10 +53,10 @@ public class Helper : MonoBehaviour
     }
     public static void PickUpFoodsOfList(List<Food> list, int Number)
     {
-
+        
         for (int i = Number - 1; i >= 0; i--)
         {
-            Food f = list[i];
+            Food f = list[0];
 
             FoodManager.Instance.OneFoodIsPicked(f);
             GameObject.Destroy(f.gameObject);
@@ -145,6 +145,26 @@ public class Helper : MonoBehaviour
 
     internal static void AddOneFoodObjectOfList(List<Food> list)
     {
-        FoodManager.Instance.AddOneFoodTolist(list, 1);
+        if (list ==FoodManager.Instance.breadList)
+        {
+            FoodManager.Instance.CreatOneFood(FoodType.Bread,list);
+
+        }
+        if (list == FoodManager.Instance.tomatoList)
+        {
+            FoodManager.Instance.CreatOneFood(FoodType.Tomato, list);
+
+        }
+        if (list == FoodManager.Instance.hamburgerList)
+        {
+            FoodManager.Instance.CreatOneFood(FoodType.Hamburger, list);
+
+
+        }
+        if (list == FoodManager.Instance.saladList)
+        {
+            FoodManager.Instance.CreatOneFood(FoodType.Salad, list);
+
+        }
     }
 }

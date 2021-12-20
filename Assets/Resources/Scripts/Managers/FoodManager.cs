@@ -68,19 +68,29 @@ public class FoodManager
         }
 
     }
+    public void CreatOneFood( FoodType foodType, List<Food> list)
+    {
+
+            GameObject newFood = GameObject.Instantiate(foodPrefabDict[foodType]);
+            Food f = newFood.GetComponent<Food>();
+            newFood.AddComponent<Rigidbody>();
+            list.Add(f);
+            newFood.SetActive(false);
+
+    }
     public void OneFoodIsPicked(Food food)
     {
 
         if (food.GetComponent<Food_Bread>())
         {
             // GameObject.Destroy(breadList[0].gameObject);
-            //  breadList.Remove(breadList[0]);
-            Debug.Log(breadList[0].GetHashCode());
-            Debug.Log(breadList.Remove(breadList[0]));
+              breadList.Remove(breadList[0]);
+            //Debug.Log(breadList[0].GetHashCode());
+            //Debug.Log(breadList.Remove(breadList[0]));
         }
         if (food.GetComponent<Food_Beef>())
         {
-            Debug.Log(hamburgerList[0].gameObject.GetInstanceID());
+            //Debug.Log(hamburgerList[0].gameObject.GetInstanceID());
             hamburgerList.Remove(hamburgerList[0]);
         }
         if (food.GetComponent<Food_Tomato>())
@@ -95,20 +105,10 @@ public class FoodManager
 
 
     }
-    public void AddOneFoodTolist(List<Food> list,int j)
-    {
-        for (int i = 0; i < j; i++)
-        {
 
-            list.Add(list[0]);
-        }
-
-
-
-    }
     public void Refresh()
     {
-      //  Debug.Log(breadList.Count);
+        Debug.Log(breadList.Count);
     }
 
 }

@@ -7,6 +7,7 @@ using BT_lib;
 public class BT_MainChef : MonoBehaviour
 {
     Movement move;
+    BT seq_BurgerIsReady;
     BT seq_ChechTheBeef;
     BT seq_MakeTheBurger;
     BT sel_MainChef;
@@ -32,6 +33,7 @@ public class BT_MainChef : MonoBehaviour
 
         move = GetComponent<Movement>();
         mainChef = GetComponent<MainChef>();
+     //   seq_BurgerIsReady = new BT(NODE_TYPE.SEQUENCE,new BT(this.CHechIfHeHasTHeBurger));
        seq_MakeTheBurger = new BT(NODE_TYPE.SEQUENCE, new BT(this.GetBread),new BT(this.GetTomato),new BT(this.GetSalad),new BT(this.GetBeef),new BT(this.DropHaburgerInFrontDesk));
         seq_ChechTheBeef = new BT(NODE_TYPE.SEQUENCE,new BT(this.CheckIfWeHaveOrder), new BT(this.CheckBurgerIsReady), seq_MakeTheBurger);
         sel_MainChef = new BT(NODE_TYPE.SELECTOR, seq_ChechTheBeef, new BT(this.Ac_GoToInitialPositon));
@@ -75,7 +77,7 @@ public class BT_MainChef : MonoBehaviour
     BT_VALUE CheckBurgerIsReady()
     {
         BT_VALUE b = BT_VALUE.FAIL;
-        if (Helper.WhichBeefReadyToPickedForChef())
+        if (Helper.WhichBeefReadyToPickedForChef()|| mainChef.hasTHeHamBurger)
         {
             GameLinks.gl.trayOfMainChef.gameObject.SetActive(true);
 
@@ -105,7 +107,7 @@ public class BT_MainChef : MonoBehaviour
     BT_VALUE GetTomato()
     {
         BT_VALUE b = BT_VALUE.SUCCESS;
-        if (mainChef.HasBread && !mainChef.HasTomato)
+        if (!mainChef.HasTomato)
         {
             b = BT_VALUE.RUNNING;
             move.navMeshAgent.SetDestination(GameLinks.gl.tomatoLocation.position);
@@ -122,7 +124,7 @@ public class BT_MainChef : MonoBehaviour
     BT_VALUE GetSalad ()
     {
         BT_VALUE b = BT_VALUE.SUCCESS;
-        if (mainChef.HasBread && mainChef.HasTomato && !mainChef.HasSalad)
+        if (!mainChef.HasSalad)
         {
             b = BT_VALUE.RUNNING;
             move.navMeshAgent.SetDestination(GameLinks.gl.sladLocation.position);
@@ -151,7 +153,7 @@ public class BT_MainChef : MonoBehaviour
                 {
                     GameObject.Destroy(stove.GetComponentInChildren<Food_Beef>().gameObject);
                 }
-
+                mainChef.hasTHeHamBurger = true;
                 stove.GetComponent<Stove>().IsFull = false;
                 stove.GetComponent<Stove>().BurgerIsReady = false;
             }
@@ -165,19 +167,25 @@ public class BT_MainChef : MonoBehaviour
 
     BT_VALUE DropHaburgerInFrontDesk()
     {
-        BT_VALUE b = BT_VALUE.RUNNING;
+        BT_VALUE b = BT_VALUE.SUCCESS;
 
-        move.navMeshAgent.SetDestination(GameLinks.gl.dropBirgerTable.position);
-        if (Helper.CheckDistance(this.transform, GameLinks.gl.dropBirgerTable, checkDistanceVariation))
+        if (mainChef.hasTHeHamBurger)
         {
-            GameLinks.gl.HamburgerPrefab.gameObject.SetActive(false);
-            b = BT_VALUE.SUCCESS;
-            mainChef.ResetChef();
-            Order -= 1;
-            mainChef.ImDoneWithTheORder = true;
-        }
-        return b;
 
+            b = BT_VALUE.RUNNING;
+            move.navMeshAgent.SetDestination(GameLinks.gl.dropBirgerTable.position);
+            if (Helper.CheckDistance(this.transform, GameLinks.gl.dropBirgerTable, checkDistanceVariation))
+            {
+                GameLinks.gl.HamburgerPrefab.gameObject.SetActive(false);
+                mainChef.ResetChef();
+                Order -= 1;
+                mainChef.ImDoneWithTheORder = true;
+            }
+
+
+        }
+
+            return b;
 
     }
 
