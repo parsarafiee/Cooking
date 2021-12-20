@@ -10,6 +10,8 @@ public class GameFlow : MonoBehaviour
         GameLinks.gl = GameObject.FindObjectOfType<GameLinks>();
         FoodManager.Instance.Initialize();
         StoveManager.Instance.Initialize();
+        OrderManager.Instance.Initialize();
+        UIManager.Instance.Initialize();
       //  ChefManager.Instance.Initialize();
 
         //   Debug.Log(PointsManager.Instance.points.Count);
@@ -20,6 +22,8 @@ public class GameFlow : MonoBehaviour
     {
         FoodManager.Instance.Refresh();
         StoveManager.Instance.Refresh();
+        OrderManager.Instance.Update();
+        UIManager.Instance.Update();
     }
 
 
