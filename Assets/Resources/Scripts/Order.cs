@@ -34,10 +34,6 @@ public class Order
         {
             timer.Update();  
         }
-        else
-        {
-            OrderManager.Instance.OrderDie(this);
-        }
     }
 
 }

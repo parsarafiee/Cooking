@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 7004163760579118011}
   - component: {fileID: 7004163760579118004}
   - component: {fileID: 7004163760579118005}
-  - component: {fileID: -1954204698859456601}
+  - component: {fileID: 2466031731843417830}
   m_Layer: 5
   m_Name: BurgerButton
   m_TagString: Untagged
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1954204698859456601}
+      - m_Target: {fileID: 2466031731843417830}
         m_TargetAssemblyTypeName: OrderButton, Assembly-CSharp
         m_MethodName: Order
         m_Mode: 1
@@ -213,7 +213,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-1954204698859456601
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: OrderButton, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2466031731843417830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,6 +234,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7004163760579118007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d589f970ad00fa4281163b06fb2d293, type: 3}
+  m_Script: {fileID: 11500000, guid: a8ef71e4541dfe0409e908ab50cc7efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

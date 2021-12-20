@@ -6,5 +6,6 @@ public class OrderButton : MonoBehaviour
     {
         if (OrderManager.Instance.OrderCount >= OrderManager.Instance.MAX_NUMBER_ORDERS) return;
         OrderManager.Instance.AddOrder();
+
     }
 }

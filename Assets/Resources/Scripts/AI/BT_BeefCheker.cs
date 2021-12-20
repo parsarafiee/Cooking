@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BT_lib;
+using UnityEngine.UI;
 
 public class BT_BeefCheker : MonoBehaviour
 {
     //
-    public int order = 1;
+    public int order;
     Movement move;
     BeefCheker ovenChecker;
     BT Seq_MaKeBeefOnOven;
@@ -14,7 +15,7 @@ public class BT_BeefCheker : MonoBehaviour
     BT Sel_OvenCheckerAI;
     BT Action_GoToInitialPositon;
     BT_MainChef mainchef;
-
+    Button button;
     public float checkDistanceVariation;
 
 
@@ -33,6 +34,14 @@ public class BT_BeefCheker : MonoBehaviour
 
 
         Sel_OvenCheckerAI = new BT(NODE_TYPE.SELECTOR, Seq_CheckBurningBeef, Seq_MaKeBeefOnOven, Action_GoToInitialPositon);
+
+        button = FindObjectOfType<OrderButton>().GetComponent<Button>();
+        button.onClick.AddListener(() => this.AddOneOrder());
+    }
+
+    public void AddOneOrder()
+    {
+        order += 1;
     }
     private void Update()
     {
@@ -157,9 +166,6 @@ public class BT_BeefCheker : MonoBehaviour
         return b;
 
     }
-
-
-
     BT_VALUE Ac_GoToInitialPositon()
     {
         BT_VALUE b = BT_VALUE.RUNNING;
@@ -175,7 +181,6 @@ public class BT_BeefCheker : MonoBehaviour
 
         return b;
     }
-
     public void RestartTheAI()
     {
 

@@ -65,5 +65,10 @@ public class UIManager
         while (toAdd.Count > 0)
             orders.Add(toAdd.Pop());
     }
+
+    public void destroyObj()
+    {
+
+    }
 }
 

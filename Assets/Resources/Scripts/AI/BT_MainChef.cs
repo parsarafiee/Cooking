@@ -177,15 +177,15 @@ public class BT_MainChef : MonoBehaviour
             if (Helper.CheckDistance(this.transform, GameLinks.gl.dropBirgerTable, checkDistanceVariation))
             {
                 GameLinks.gl.HamburgerPrefab.gameObject.SetActive(false);
-                GameObject haburger = Instantiate(GameLinks.gl.HamburgerPrefab, GameLinks.gl.HaburgerFinishLocation.position,Quaternion.identity);
+                GameObject haburger = Instantiate(GameLinks.gl.HamburgerPrefab, GameLinks.gl.HaburgerFinishLocation.position, Quaternion.identity);
                 haburger.AddComponent<Rigidbody>();
                 haburger.SetActive(true);
                 mainChef.ResetChef();
                 Order -= 1;
                 mainChef.ImDoneWithTheORder = true;
+                // Delet Order add some finishing music 
+
             }
-
-
         }
 
             return b;
@@ -195,7 +195,6 @@ public class BT_MainChef : MonoBehaviour
     BT_VALUE Ac_GoToInitialPositon()
     {
         BT_VALUE b = BT_VALUE.RUNNING;
-
         move.navMeshAgent.SetDestination(GameLinks.gl.MainChefLocation.position);
         if (Helper.CheckDistance(this.transform, GameLinks.gl.MainChefLocation.transform, checkDistanceVariation))
         {

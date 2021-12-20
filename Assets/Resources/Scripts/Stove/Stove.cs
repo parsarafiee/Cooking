@@ -19,16 +19,11 @@ public class Stove : MonoBehaviour
           //  Debug.Log(BurgerTimer);
         }
         CheckIFBurgerIsReady();
-        //if (BurgerIsReady)
-        //{
-        //    mesh.material = material;
-        //    //Make a Sound
-        //    //
-        //}
 
-            //Make a Sound
-            //
-        
+
+        //Make a Sound
+        //
+
     }
 
     void CheckIFBurgerIsReady()
@@ -43,6 +38,8 @@ public class Stove : MonoBehaviour
     {
 
         stoveIsOn = !stoveIsOn;
+         mesh.material.color = stoveIsOn ? mesh.material.color = Color.red : mesh.material.color = Color.white ;
+
         BurgerTimer = 0;
     }
 

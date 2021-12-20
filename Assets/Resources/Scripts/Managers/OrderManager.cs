@@ -11,7 +11,7 @@ public class OrderManager
     public static OrderManager Instance { get { return instance ?? (instance = new OrderManager()); } }
     #endregion
 
-    private HashSet<Order> orders;
+    public HashSet<Order> orders;
     private Stack<Order> toRemove;
     private Stack<Order> toAdd;
 
@@ -34,6 +34,7 @@ public class OrderManager
 
         while (toRemove.Count > 0)
         {
+
             var order = toRemove.Pop();
             orders.Remove(order);
         }
@@ -44,7 +45,9 @@ public class OrderManager
 
     public void OrderDie(Order order)
     {
+       
         toRemove.Push(order);
+        
     }
 
     public void AddOrder()
