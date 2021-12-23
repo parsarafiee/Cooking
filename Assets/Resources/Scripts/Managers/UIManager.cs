@@ -12,15 +12,15 @@ public class UIManager
 
     private Object orderPrefab;
 
-    private HashSet<GameObject> orders;
-    private Stack<GameObject> toRemove;
-    private Stack<GameObject> toAdd;
+     public List<GameObject> orders;
+     public Stack<GameObject> toRemove;
+     public Stack<GameObject> toAdd;
 
     public void Initialize()
     {
         LoadRestaurantMenu();
         orderPrefab = Resources.Load("Prefabs/UIOrders/BurgerOrder", typeof(GameObject)) as GameObject;
-        orders = new HashSet<GameObject>();
+        orders = new List<GameObject>();
         toRemove = new Stack<GameObject>();
         toAdd = new Stack<GameObject>();
     }
@@ -59,7 +59,7 @@ public class UIManager
         {
             var order = toRemove.Pop();
             orders.Remove(order);
-            GameObject.Destroy(order);
+          //  GameObject.Destroy(order);
         }
 
         while (toAdd.Count > 0)

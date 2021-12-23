@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BT_lib;
+using UnityEngine.UI;
 
 
 public class BT_MainChef : MonoBehaviour
@@ -12,10 +13,11 @@ public class BT_MainChef : MonoBehaviour
     BT seq_MakeTheBurger;
     BT sel_MainChef;
 
-
+    public Text text;
     BT_BeefCheker bt_beefCheker;
     MainChef mainChef;
 
+    float scored = 0;
    // public GameObject hamburgerPrefab;
     public int NumberOfBread;
     public int NumberOfBeef;
@@ -40,7 +42,8 @@ public class BT_MainChef : MonoBehaviour
     }
     private void Update()
     {
-        Order = bt_beefCheker.order;
+        text.text = scored.ToString();
+           Order = bt_beefCheker.order;
         sel_MainChef.Evaluate();
 
     }
@@ -183,6 +186,9 @@ public class BT_MainChef : MonoBehaviour
                 mainChef.ResetChef();
                 Order -= 1;
                 mainChef.ImDoneWithTheORder = true;
+                scored += 10;
+                GameObject.Destroy(UIManager.Instance.orders[0].gameObject);
+                UIManager.Instance.orders.Remove(UIManager.Instance.orders[0]);
                 // Delet Order add some finishing music 
 
             }
